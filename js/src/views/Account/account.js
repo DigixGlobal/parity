@@ -17,10 +17,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import ActionFingerprint from 'material-ui/svg-icons/action/fingerprint';
 import ContentCreate from 'material-ui/svg-icons/content/create';
 import ContentSend from 'material-ui/svg-icons/content/send';
 
-import { EditMeta, Shapeshift, Transfer } from '../../modals';
+import { EditMeta, Shapeshift, Sign, Transfer } from '../../modals';
 import { Actionbar, Button, Page } from '../../ui';
 
 import shapeshiftBtn from '../../../assets/images/shapeshift-btn.png';
@@ -44,6 +45,7 @@ class Account extends Component {
   state = {
     showEditDialog: false,
     showFundDialog: false,
+    showSignDialog: false,
     showTransferDialog: false
   }
 
@@ -62,6 +64,7 @@ class Account extends Component {
       <div className={ styles.account }>
         { this.renderEditDialog(account) }
         { this.renderFundDialog() }
+        { this.renderSignDialog() }
         { this.renderTransferDialog() }
         { this.renderActionbar() }
         <Page>
@@ -84,6 +87,11 @@ class Account extends Component {
         icon={ <ContentSend /> }
         label='transfer'
         onClick={ this.onTransferClick } />,
+      <Button
+        key='sign'
+        icon={ <ActionFingerprint /> }
+        label='sign'
+        onClick={ this.onSignClick } />,
       <Button
         key='shapeshift'
         icon={ <img src={ shapeshiftBtn } className={ styles.btnicon } /> }
@@ -134,6 +142,22 @@ class Account extends Component {
     );
   }
 
+  renderSignDialog () {
+    const { showSignDialog } = this.state;
+
+    if (!showSignDialog) {
+      return null;
+    }
+
+    const { address } = this.props.params;
+
+    return (
+      <Sign
+        address={ address }
+        onClose={ this.onSignClose } />
+    );
+  }
+
   renderTransferDialog () {
     const { showTransferDialog } = this.state;
 
@@ -170,6 +194,16 @@ class Account extends Component {
 
   onShapeshiftAccountClose = () => {
     this.onShapeshiftAccountClick();
+  }
+
+  onSignClick = () => {
+    this.setState({
+      showSignDialog: !this.state.showSignDialog
+    });
+  }
+
+  onSignClose = () => {
+    this.onSignClick();
   }
 
   onTransferClick = () => {

@@ -14,26 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity.  If not, see <http://www.gnu.org/licenses/>.
 
-import AddAddress from './AddAddress';
-import AddContract from './AddContract';
-import CreateAccount from './CreateAccount';
-import DeployContract from './DeployContract';
-import EditMeta from './EditMeta';
-import ExecuteContract from './ExecuteContract';
-import FirstRun from './FirstRun';
-import Shapeshift from './Shapeshift';
-import Sign from './Sign';
-import Transfer from './Transfer';
+import React, { Component, PropTypes } from 'react';
 
-export {
-  AddAddress,
-  AddContract,
-  CreateAccount,
-  DeployContract,
-  EditMeta,
-  ExecuteContract,
-  FirstRun,
-  Shapeshift,
-  Sign,
-  Transfer
-};
+export default class Sign extends Component {
+  static contextTypes = {
+    api: PropTypes.object.isRequired
+  }
+
+  static propTypes = {
+    account: PropTypes.object,
+    onClose: PropTypes.func
+  }
+
+  render () {
+    return (
+      <div className={ styles.body }>hello</div>
+    );
+  }
+}
