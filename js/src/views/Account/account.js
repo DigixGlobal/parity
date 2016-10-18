@@ -17,7 +17,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ActionFingerprint from 'material-ui/svg-icons/action/fingerprint';
+// import ActionFingerprint from 'material-ui/svg-icons/action/fingerprint';
 import ContentCreate from 'material-ui/svg-icons/content/create';
 import ContentSend from 'material-ui/svg-icons/content/send';
 
@@ -32,6 +32,10 @@ import Transactions from './Transactions';
 import styles from './account.css';
 
 class Account extends Component {
+  static contextTypes = {
+    api: PropTypes.object
+  }
+
   static propTypes = {
     params: PropTypes.object,
     accounts: PropTypes.object,
@@ -81,17 +85,17 @@ class Account extends Component {
   }
 
   renderActionbar () {
+    // <Button
+    //   key='sign'
+    //   icon={ <ActionFingerprint /> }
+    //   label='sign'
+    //   onClick={ this.onSignClick } />,
     const buttons = [
       <Button
         key='transferFunds'
         icon={ <ContentSend /> }
         label='transfer'
         onClick={ this.onTransferClick } />,
-      <Button
-        key='sign'
-        icon={ <ActionFingerprint /> }
-        label='sign'
-        onClick={ this.onSignClick } />,
       <Button
         key='shapeshift'
         icon={ <img src={ shapeshiftBtn } className={ styles.btnicon } /> }
