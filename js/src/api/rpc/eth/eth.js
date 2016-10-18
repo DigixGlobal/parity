@@ -293,7 +293,6 @@ export default class Eth {
   }
 
   sign (address, data) {
-    console.log('sign', inAddress(address), inData(data));
     return this._transport
       .execute('eth_sign', inAddress(address), inData(data));
   }
